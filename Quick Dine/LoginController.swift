@@ -85,7 +85,7 @@ class LoginController: UIViewController {
     }
     
     func setupProviderLoginView() {
-        let authorizationButton = ASAuthorizationAppleIDButton()
+        let authorizationButton = ASAuthorizationAppleIDButton(authorizationButtonType: ASAuthorizationAppleIDButton.ButtonType.signIn, authorizationButtonStyle: ASAuthorizationAppleIDButton.Style.white)
         authorizationButton.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
         self.loginProviderStackView.addArrangedSubview(authorizationButton)
     }
@@ -211,7 +211,7 @@ class LoginController: UIViewController {
     
     func transitionToHome(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "homeVC")
+        let controller = storyboard.instantiateViewController(withIdentifier: "TabBarController")
         self.present(controller, animated: true, completion: nil)
     }
 
