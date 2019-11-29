@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,10 @@
 		258372BA23873156002AEB63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 258372B823873156002AEB63 /* Main.storyboard */; };
 		258372BC23873159002AEB63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 258372BB23873159002AEB63 /* Assets.xcassets */; };
 		258372BF23873159002AEB63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 258372BD23873159002AEB63 /* LaunchScreen.storyboard */; };
+		258372C723873196002AEB63 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372C623873196002AEB63 /* LoginController.swift */; };
+		258372CA2388C469002AEB63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 258372C92388C469002AEB63 /* GoogleService-Info.plist */; };
+		258372CC2390E0DD002AEB63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372CB2390E0DC002AEB63 /* HomeViewController.swift */; };
+		BB0DAD3FEAFB6E0B8847BC61 /* Pods_Quick_Dine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38254615DB28E5EA58E18716 /* Pods_Quick_Dine.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,13 @@
 		258372BB23873159002AEB63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		258372BE23873159002AEB63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		258372C023873159002AEB63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		258372C623873196002AEB63 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		258372C823873257002AEB63 /* Quick Dine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Quick Dine.entitlements"; sourceTree = "<group>"; };
+		258372C92388C469002AEB63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		258372CB2390E0DC002AEB63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		2B6AA1268EE89F3B5D1CC6E7 /* Pods-Quick Dine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quick Dine.release.xcconfig"; path = "Target Support Files/Pods-Quick Dine/Pods-Quick Dine.release.xcconfig"; sourceTree = "<group>"; };
+		38254615DB28E5EA58E18716 /* Pods_Quick_Dine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quick_Dine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88E68B6388576DD9873E745D /* Pods-Quick Dine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quick Dine.debug.xcconfig"; path = "Target Support Files/Pods-Quick Dine/Pods-Quick Dine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB0DAD3FEAFB6E0B8847BC61 /* Pods_Quick_Dine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +54,8 @@
 			children = (
 				258372B123873156002AEB63 /* Quick Dine */,
 				258372B023873156002AEB63 /* Products */,
+				79BE658FFF7D3652D398B42D /* Pods */,
+				435FB8D0931E8A15FF992D40 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +70,36 @@
 		258372B123873156002AEB63 /* Quick Dine */ = {
 			isa = PBXGroup;
 			children = (
+				258372C92388C469002AEB63 /* GoogleService-Info.plist */,
+				258372C823873257002AEB63 /* Quick Dine.entitlements */,
 				258372B223873156002AEB63 /* AppDelegate.swift */,
 				258372B423873156002AEB63 /* SceneDelegate.swift */,
 				258372B623873156002AEB63 /* ViewController.swift */,
+				258372C623873196002AEB63 /* LoginController.swift */,
+				258372CB2390E0DC002AEB63 /* HomeViewController.swift */,
 				258372B823873156002AEB63 /* Main.storyboard */,
 				258372BB23873159002AEB63 /* Assets.xcassets */,
 				258372BD23873159002AEB63 /* LaunchScreen.storyboard */,
 				258372C023873159002AEB63 /* Info.plist */,
 			);
 			path = "Quick Dine";
+			sourceTree = "<group>";
+		};
+		435FB8D0931E8A15FF992D40 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				38254615DB28E5EA58E18716 /* Pods_Quick_Dine.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		79BE658FFF7D3652D398B42D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				88E68B6388576DD9873E745D /* Pods-Quick Dine.debug.xcconfig */,
+				2B6AA1268EE89F3B5D1CC6E7 /* Pods-Quick Dine.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +109,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 258372C323873159002AEB63 /* Build configuration list for PBXNativeTarget "Quick Dine" */;
 			buildPhases = (
+				24BA1FA2AED718AA710E9BD8 /* [CP] Check Pods Manifest.lock */,
 				258372AB23873156002AEB63 /* Sources */,
 				258372AC23873156002AEB63 /* Frameworks */,
 				258372AD23873156002AEB63 /* Resources */,
+				4015E59C57F1B78036143D1F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				258372BF23873159002AEB63 /* LaunchScreen.storyboard in Resources */,
+				258372CA2388C469002AEB63 /* GoogleService-Info.plist in Resources */,
 				258372BC23873159002AEB63 /* Assets.xcassets in Resources */,
 				258372BA23873156002AEB63 /* Main.storyboard in Resources */,
 			);
@@ -133,12 +171,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		24BA1FA2AED718AA710E9BD8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Quick Dine-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4015E59C57F1B78036143D1F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Quick Dine/Pods-Quick Dine-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Quick Dine/Pods-Quick Dine-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Quick Dine/Pods-Quick Dine-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		258372AB23873156002AEB63 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				258372CC2390E0DD002AEB63 /* HomeViewController.swift in Sources */,
 				258372B723873156002AEB63 /* ViewController.swift in Sources */,
+				258372C723873196002AEB63 /* LoginController.swift in Sources */,
 				258372B323873156002AEB63 /* AppDelegate.swift in Sources */,
 				258372B523873156002AEB63 /* SceneDelegate.swift in Sources */,
 			);
@@ -282,8 +364,10 @@
 		};
 		258372C423873159002AEB63 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88E68B6388576DD9873E745D /* Pods-Quick Dine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Quick Dine/Quick Dine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6F3NQK9TY;
 				INFOPLIST_FILE = "Quick Dine/Info.plist";
@@ -291,7 +375,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.thomastai.Quick-Dine";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thomastai.quickdine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -300,8 +384,10 @@
 		};
 		258372C523873159002AEB63 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B6AA1268EE89F3B5D1CC6E7 /* Pods-Quick Dine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Quick Dine/Quick Dine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6F3NQK9TY;
 				INFOPLIST_FILE = "Quick Dine/Info.plist";
@@ -309,7 +395,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.thomastai.Quick-Dine";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thomastai.quickdine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
