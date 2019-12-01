@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="S8S-RJ-hP9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
@@ -187,7 +187,7 @@
         <!--Order-->
         <scene sceneID="2fa-Yt-6D2">
             <objects>
-                <viewController id="S8S-RJ-hP9" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="orderVC" id="S8S-RJ-hP9" customClass="OrderViewController" customModule="Quick_Dine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DcH-e5-pr4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -202,8 +202,10 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ce-G7-UdV">
                                 <rect key="frame" x="325" y="65.5" width="40" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" image="camera.fill" catalog="system" backgroundImage="circle"/>
+                                <connections>
+                                    <action selector="cameraButtonPressed:" destination="S8S-RJ-hP9" eventType="touchUpInside" id="r7A-NX-fRz"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="permissions" translatesAutoresizingMaskIntoConstraints="NO" id="5yd-lm-Aov">
                                 <rect key="frame" x="42" y="127" width="330" height="240"/>
@@ -221,7 +223,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
-                                <state key="normal" title="Allow">
+                                <state key="normal" title="Order Food">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -229,6 +231,9 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="orderButtonPressed:" destination="S8S-RJ-hP9" eventType="touchUpInside" id="v49-XB-leS"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -240,6 +245,41 @@
             </objects>
             <point key="canvasLocation" x="2594.202898550725" y="126.5625"/>
         </scene>
+        <!--QR Code Scanner-->
+        <scene sceneID="zIW-sj-z67">
+            <objects>
+                <viewController storyboardIdentifier="scannerVC" title="QR Code Scanner" id="M0v-jv-vv7" customClass="ScannerViewController" customModule="Quick_Dine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XBv-9j-eKU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="60l-h0-CP6">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Scan QR Code" id="dxA-si-aU1">
+                                        <barButtonItem key="rightBarButtonItem" title="Item" image="xmark" catalog="system" id="dKn-PS-KSI">
+                                            <connections>
+                                                <action selector="exitCameraView:" destination="M0v-jv-vv7" id="YfX-5r-SWW"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.zPosition">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="odV-Sl-WT7"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rEL-Xb-wGG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2598.5507246376815" y="834.375"/>
+        </scene>
         <!--Favorites-->
         <scene sceneID="uYA-dX-o66">
             <objects>
@@ -250,7 +290,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="GDJ-nP-m1H"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="lMG-YH-F9K"/>
+                    <tabBarItem key="tabBarItem" title="Cart" image="cart" catalog="system" id="lMG-YH-F9K"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7u-sN-UqE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -328,11 +368,13 @@
     </scenes>
     <resources>
         <image name="camera.fill" catalog="system" width="64" height="48"/>
+        <image name="cart" catalog="system" width="64" height="50"/>
         <image name="circle" catalog="system" width="64" height="60"/>
         <image name="house" catalog="system" width="64" height="54"/>
         <image name="login-splash" width="1000" height="1500"/>
         <image name="logo-transparent" width="822" height="800"/>
         <image name="permissions" width="928" height="710"/>
         <image name="square.and.pencil" catalog="system" width="64" height="58"/>
+        <image name="xmark" catalog="system" width="64" height="56"/>
     </resources>
 </document>

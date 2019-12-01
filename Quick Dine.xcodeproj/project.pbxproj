@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25111A9023920B7E00C392ED /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25111A8F23920B7E00C392ED /* ScannerViewController.swift */; };
 		258372B323873156002AEB63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372B223873156002AEB63 /* AppDelegate.swift */; };
 		258372B523873156002AEB63 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372B423873156002AEB63 /* SceneDelegate.swift */; };
 		258372B723873156002AEB63 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372B623873156002AEB63 /* ViewController.swift */; };
@@ -18,10 +19,12 @@
 		258372CC2390E0DD002AEB63 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372CB2390E0DC002AEB63 /* HomeViewController.swift */; };
 		258372CF23918F4F002AEB63 /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 258372CE23918F33002AEB63 /* SF-Pro-Display-Regular.otf */; };
 		258372D123918FC9002AEB63 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 258372D023918FC7002AEB63 /* SF-Pro-Display-Bold.otf */; };
+		258372D32391CC07002AEB63 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372D22391CC06002AEB63 /* OrderViewController.swift */; };
 		BB0DAD3FEAFB6E0B8847BC61 /* Pods_Quick_Dine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38254615DB28E5EA58E18716 /* Pods_Quick_Dine.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		25111A8F23920B7E00C392ED /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		258372AF23873156002AEB63 /* Quick Dine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quick Dine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		258372B223873156002AEB63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		258372B423873156002AEB63 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 		258372CB2390E0DC002AEB63 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		258372CE23918F33002AEB63 /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
 		258372D023918FC7002AEB63 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
+		258372D22391CC06002AEB63 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		2B6AA1268EE89F3B5D1CC6E7 /* Pods-Quick Dine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quick Dine.release.xcconfig"; path = "Target Support Files/Pods-Quick Dine/Pods-Quick Dine.release.xcconfig"; sourceTree = "<group>"; };
 		38254615DB28E5EA58E18716 /* Pods_Quick_Dine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quick_Dine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E68B6388576DD9873E745D /* Pods-Quick Dine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quick Dine.debug.xcconfig"; path = "Target Support Files/Pods-Quick Dine/Pods-Quick Dine.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 				258372C623873196002AEB63 /* LoginController.swift */,
 				258372CB2390E0DC002AEB63 /* HomeViewController.swift */,
 				258372B823873156002AEB63 /* Main.storyboard */,
+				25111A8F23920B7E00C392ED /* ScannerViewController.swift */,
+				258372D22391CC06002AEB63 /* OrderViewController.swift */,
 				258372BB23873159002AEB63 /* Assets.xcassets */,
 				258372CD23918F24002AEB63 /* fonts */,
 				258372BD23873159002AEB63 /* LaunchScreen.storyboard */,
@@ -234,7 +240,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25111A9023920B7E00C392ED /* ScannerViewController.swift in Sources */,
 				258372CC2390E0DD002AEB63 /* HomeViewController.swift in Sources */,
+				258372D32391CC07002AEB63 /* OrderViewController.swift in Sources */,
 				258372B723873156002AEB63 /* ViewController.swift in Sources */,
 				258372C723873196002AEB63 /* LoginController.swift in Sources */,
 				258372B323873156002AEB63 /* AppDelegate.swift in Sources */,
