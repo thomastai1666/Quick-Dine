@@ -52,34 +52,24 @@ extension OrderViewController: NFCNDEFReaderSessionDelegate {
             let record = ndefMessage.records.first,
             record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
             let payloadText = String(data: record.payload, encoding: .utf8),
-            let sku = payloadText.split(separator: "/").last else {
+            let table = payloadText.split(separator: "/").last else {
                 return
         }
         
         
         self.session = nil
-        
-//        guard let product = productStore.product(withID: String(sku)) else {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-//                let alertController = UIAlertController(title: "Info", message: "SKU Not found in catalog",preferredStyle: .alert)
-//                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                self?.present(alertController, animated: true, completion: nil)
-//            }
-//            return
-//        }
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-//            self?.presentProductViewController(product: product)
-//        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            self?.presentMenuViewController(tableID: String(table))
+        }
     }
     
-//    func presentProductViewController(product: Product) {
-//        let vc = storyboard!.instantiateViewController(withIdentifier: "ProductViewController") as! ProductViewController
-//        vc.product = product
-//        let navVC = UINavigationController(rootViewController: vc)
-//        navVC.modalPresentationStyle = .formSheet
-//        present(navVC, animated: true, completion: nil)
-//    }
+    func presentMenuViewController(tableID: String) {
+        print(tableID)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "menuVC")
+        self.present(controller, animated: true, completion: nil)
+    }
     
     
     /// - Tag: endScanning

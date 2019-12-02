@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		25111A9023920B7E00C392ED /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25111A8F23920B7E00C392ED /* ScannerViewController.swift */; };
+		25111A962394769600C392ED /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25111A952394769600C392ED /* MoreViewController.swift */; };
+		25111A9823948F1000C392ED /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25111A9723948F1000C392ED /* CollectionViewCell.swift */; };
+		25111A9A2395AA1B00C392ED /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25111A992395AA1B00C392ED /* MenuViewController.swift */; };
 		258372B323873156002AEB63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372B223873156002AEB63 /* AppDelegate.swift */; };
 		258372B523873156002AEB63 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372B423873156002AEB63 /* SceneDelegate.swift */; };
 		258372B723873156002AEB63 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372B623873156002AEB63 /* ViewController.swift */; };
@@ -25,6 +28,9 @@
 
 /* Begin PBXFileReference section */
 		25111A8F23920B7E00C392ED /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		25111A952394769600C392ED /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		25111A9723948F1000C392ED /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		25111A992395AA1B00C392ED /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		258372AF23873156002AEB63 /* Quick Dine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quick Dine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		258372B223873156002AEB63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		258372B423873156002AEB63 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,9 +91,12 @@
 				258372B623873156002AEB63 /* ViewController.swift */,
 				258372C623873196002AEB63 /* LoginController.swift */,
 				258372CB2390E0DC002AEB63 /* HomeViewController.swift */,
+				25111A9723948F1000C392ED /* CollectionViewCell.swift */,
 				258372B823873156002AEB63 /* Main.storyboard */,
+				25111A992395AA1B00C392ED /* MenuViewController.swift */,
 				25111A8F23920B7E00C392ED /* ScannerViewController.swift */,
 				258372D22391CC06002AEB63 /* OrderViewController.swift */,
+				25111A952394769600C392ED /* MoreViewController.swift */,
 				258372BB23873159002AEB63 /* Assets.xcassets */,
 				258372CD23918F24002AEB63 /* fonts */,
 				258372BD23873159002AEB63 /* LaunchScreen.storyboard */,
@@ -241,10 +250,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				25111A9023920B7E00C392ED /* ScannerViewController.swift in Sources */,
+				25111A9A2395AA1B00C392ED /* MenuViewController.swift in Sources */,
 				258372CC2390E0DD002AEB63 /* HomeViewController.swift in Sources */,
+				25111A9823948F1000C392ED /* CollectionViewCell.swift in Sources */,
 				258372D32391CC07002AEB63 /* OrderViewController.swift in Sources */,
 				258372B723873156002AEB63 /* ViewController.swift in Sources */,
 				258372C723873196002AEB63 /* LoginController.swift in Sources */,
+				25111A962394769600C392ED /* MoreViewController.swift in Sources */,
 				258372B323873156002AEB63 /* AppDelegate.swift in Sources */,
 				258372B523873156002AEB63 /* SceneDelegate.swift in Sources */,
 			);
