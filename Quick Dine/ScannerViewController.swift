@@ -95,10 +95,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
 
     func found(code: String) {
-        dismiss(animated: true, completion: nil)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "menuVC")
-        self.present(controller, animated: true, completion: nil)
+        weak var pvc = self.presentingViewController
+
+        self.dismiss(animated: true, completion: {
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "menuVC")
+            pvc?.present(controller!, animated: true, completion: nil)
+        })
     }
 
     override var prefersStatusBarHidden: Bool {

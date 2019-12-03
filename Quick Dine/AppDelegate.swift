@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
         
+        print("Hello Test 1")
         // Confirm that the NSUserActivity object contains a valid NDEF message.
         let ndefMessage = userActivity.ndefMessagePayload
         
@@ -47,24 +48,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let record = ndefMessage.records.first,
             record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
             let payloadText = String(data: record.payload, encoding: .utf8),
-            let table = payloadText.split(separator: "/").last else {
+            let tableid = payloadText.split(separator: "/").last else {
                 return false
         }
         
-        print(table)
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "TabBarController")
+        self.window?.rootViewController = vc
+        self.window?.makeKeyAndVisible()
         
-        //guard let product = productStore.product(withID: String(sku)) else {
-        //    return false
-        //}
-        
-        
-        guard let navigationController = window?.rootViewController as? UINavigationController else {
-            return false
+        if let tabBarController = self.window!.rootViewController as? UITabBarController {
+            tabBarController.selectedIndex = 1
+            let controller = sb.instantiateViewController(withIdentifier: "menuVC")
+            tabBarController.present(controller, animated: true, completion: nil)
         }
-        
-        //navigationController.dismiss(animated: true, completion: nil)
-        //let mainVC = navigationController.topViewController as? MainViewController
-        //mainVC?.presentProductViewController(product: product)
         return true
     }
 

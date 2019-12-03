@@ -43,5 +43,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         return cell
     }
+    
+    func presentMenuViewController(tableID: String) {
+        let vc = storyboard!.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
+        vc.tableID = tableID
+        let navVC = UINavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .formSheet
+        present(navVC, animated: true, completion: nil)
+    }
 
 }

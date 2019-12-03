@@ -9,14 +9,16 @@
 import UIKit
 import CoreNFC
 
-class OrderViewController: UIViewController {
+class OrderViewController: UIViewController, UISearchBarDelegate {
 
     var session: NFCNDEFReaderSession?
+    @IBOutlet var orderSearchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("Order Up")
+        orderSearchBar.delegate = self
     }
     
     @IBAction func orderButtonPressed(_ sender: Any) {
@@ -36,7 +38,15 @@ class OrderViewController: UIViewController {
         self.present(controller, animated: true, completion: nil)
     }
     
-
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if(searchText.count == 5){
+            //table ID
+            print(searchText)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "menuVC")
+            self.present(controller, animated: true, completion: nil)
+        }
+    }
 }
 
 extension OrderViewController: NFCNDEFReaderSessionDelegate {

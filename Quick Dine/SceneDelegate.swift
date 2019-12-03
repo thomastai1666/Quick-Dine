@@ -48,6 +48,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else{
+            return
+        }
+        
+        print("Hello Test 2")
+        // Confirm that the NSUserActivity object contains a valid NDEF message.
+//        let ndefMessage = userActivity.ndefMessagePayload
+        
+//        guard
+//            let record = ndefMessage.records.first,
+//            record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
+//            let payloadText = String(data: record.payload, encoding: .utf8),
+//            let tableid = payloadText.split(separator: "/").last else {
+//                return
+//        }
+
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "TabBarController")
+        self.window?.rootViewController = vc
+        self.window?.makeKeyAndVisible()
+        
+        if let tabBarController = self.window!.rootViewController as? UITabBarController {
+            tabBarController.selectedIndex = 1
+            let controller = sb.instantiateViewController(withIdentifier: "menuVC")
+            tabBarController.present(controller, animated: true, completion: nil)
+        }
+//        let mainVC = navigationController.topViewController as? UITabBarController
+//        mainVC?.selectedIndex = 1
+    }
 
 }
 
