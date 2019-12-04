@@ -10,6 +10,10 @@
 	<array>
 		<string>applinks:thomastai.com</string>
 	</array>
+	<key>com.apple.developer.in-app-payments</key>
+	<array>
+		<string>merchant.com.thomastai.quickdinne</string>
+	</array>
 	<key>com.apple.developer.nfc.readersession.formats</key>
 	<array>
 		<string>NDEF</string>

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CartTableDelegate: class {
+    func reloadTable()
+}
+
 class CartViewCell: UITableViewCell {
     
     @IBOutlet weak var menuImage: UIImageView!
@@ -17,6 +21,8 @@ class CartViewCell: UITableViewCell {
     @IBOutlet weak var menuItemCount: UILabel!
     
     var MenuViewCellItem: Item!
+    
+    weak var delegate: CartTableDelegate?
     
     var itemcount = 0
     
@@ -38,6 +44,7 @@ class CartViewCell: UITableViewCell {
         if(itemcount == 0){
             removeItem(item: MenuViewCellItem)
         }
+        delegate?.reloadTable()
         print(orderedItems)
     }
     
@@ -46,6 +53,7 @@ class CartViewCell: UITableViewCell {
         menuItemCount.text = String(itemcount)
         MenuViewCellItem.quantity = itemcount
         updateOrAddItem(item: MenuViewCellItem)
+        delegate?.reloadTable()
         print(orderedItems)
     }
     

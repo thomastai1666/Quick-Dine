@@ -14,6 +14,7 @@ class OrderViewController: UIViewController, UISearchBarDelegate {
     var session: NFCNDEFReaderSession?
     @IBOutlet var orderSearchBar: UISearchBar!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
