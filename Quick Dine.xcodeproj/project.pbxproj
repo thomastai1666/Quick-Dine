@@ -16,6 +16,7 @@
 		25111AA62396F5A800C392ED /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25111AA52396F5A800C392ED /* CartViewController.swift */; };
 		25111AA8239707CD00C392ED /* CartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25111AA7239707CD00C392ED /* CartViewCell.swift */; };
 		25111AAA23977BA300C392ED /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25111AA923977BA300C392ED /* PopUpViewController.swift */; };
+		25111AAC23984B4F00C392ED /* OrderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25111AAB23984B4F00C392ED /* OrderViewCell.swift */; };
 		258372B323873156002AEB63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372B223873156002AEB63 /* AppDelegate.swift */; };
 		258372B523873156002AEB63 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372B423873156002AEB63 /* SceneDelegate.swift */; };
 		258372B723873156002AEB63 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372B623873156002AEB63 /* ViewController.swift */; };
@@ -41,6 +42,7 @@
 		25111AA52396F5A800C392ED /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		25111AA7239707CD00C392ED /* CartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewCell.swift; sourceTree = "<group>"; };
 		25111AA923977BA300C392ED /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		25111AAB23984B4F00C392ED /* OrderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewCell.swift; sourceTree = "<group>"; };
 		258372AF23873156002AEB63 /* Quick Dine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quick Dine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		258372B223873156002AEB63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		258372B423873156002AEB63 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,21 +99,22 @@
 				258372C92388C469002AEB63 /* GoogleService-Info.plist */,
 				258372C823873257002AEB63 /* Quick Dine.entitlements */,
 				258372B823873156002AEB63 /* Main.storyboard */,
-				25111AA923977BA300C392ED /* PopUpViewController.swift */,
-				258372B223873156002AEB63 /* AppDelegate.swift */,
 				258372B423873156002AEB63 /* SceneDelegate.swift */,
+				258372B223873156002AEB63 /* AppDelegate.swift */,
 				258372B623873156002AEB63 /* ViewController.swift */,
+				25111AA32396EA2700C392ED /* GlobalVars.swift */,
 				258372C623873196002AEB63 /* LoginController.swift */,
 				258372CB2390E0DC002AEB63 /* HomeViewController.swift */,
 				25111A9723948F1000C392ED /* CollectionViewCell.swift */,
-				25111AA52396F5A800C392ED /* CartViewController.swift */,
-				25111AA7239707CD00C392ED /* CartViewCell.swift */,
-				25111AA32396EA2700C392ED /* GlobalVars.swift */,
 				25111A992395AA1B00C392ED /* MenuViewController.swift */,
 				25111A9B2395DB0B00C392ED /* MenuViewCell.swift */,
-				25111A8F23920B7E00C392ED /* ScannerViewController.swift */,
 				258372D22391CC06002AEB63 /* OrderViewController.swift */,
+				25111A8F23920B7E00C392ED /* ScannerViewController.swift */,
+				25111AA52396F5A800C392ED /* CartViewController.swift */,
+				25111AA7239707CD00C392ED /* CartViewCell.swift */,
+				25111AA923977BA300C392ED /* PopUpViewController.swift */,
 				25111A952394769600C392ED /* MoreViewController.swift */,
+				25111AAB23984B4F00C392ED /* OrderViewCell.swift */,
 				258372BB23873159002AEB63 /* Assets.xcassets */,
 				258372CD23918F24002AEB63 /* fonts */,
 				258372BD23873159002AEB63 /* LaunchScreen.storyboard */,
@@ -269,6 +272,7 @@
 				25111AA8239707CD00C392ED /* CartViewCell.swift in Sources */,
 				258372CC2390E0DD002AEB63 /* HomeViewController.swift in Sources */,
 				25111A9823948F1000C392ED /* CollectionViewCell.swift in Sources */,
+				25111AAC23984B4F00C392ED /* OrderViewCell.swift in Sources */,
 				25111AA42396EA2700C392ED /* GlobalVars.swift in Sources */,
 				258372D32391CC07002AEB63 /* OrderViewController.swift in Sources */,
 				25111AA62396F5A800C392ED /* CartViewController.swift in Sources */,

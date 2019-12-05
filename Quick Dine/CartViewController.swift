@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import PassKit
 import Stripe
+import FirebaseAuth
+import Firebase
 
 class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CartTableDelegate{
     
@@ -19,25 +21,31 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet var cartTableView: UITableView!
     
+    let db = Firestore.firestore()
+    
     func reloadTable() {
         cartTableView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if self.traitCollection.userInterfaceStyle == .dark {
-            // User Interface is Dark
-            applePayButton = PKPaymentButton(paymentButtonType: .inStore, paymentButtonStyle: .white)
-        } else {
-            // User Interface is Light
-            applePayButton = PKPaymentButton(paymentButtonType: .inStore, paymentButtonStyle: .black)
-        }
+        applePayButton = PKPaymentButton(paymentButtonType: .inStore, paymentButtonStyle: .whiteOutline)
         applePayButton.isEnabled = Stripe.deviceSupportsApplePay()
         STPPaymentConfiguration.shared().appleMerchantIdentifier = "merchant.com.thomastai.quickdinne"
         if(applePayButton.isEnabled){
             setupApplePay()
         }
         print("Cart Loaded")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if self.traitCollection.userInterfaceStyle == .dark {
+            // User Interface is Dark
+            applePayButton = PKPaymentButton(paymentButtonType: .inStore, paymentButtonStyle: .white)
+        } else {
+            // User Interface is Light
+            applePayButton = PKPaymentButton(paymentButtonType: .inStore, paymentButtonStyle: .white)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -83,10 +91,11 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func getCartTotal() -> NSDecimalNumber{
         var total: Float = 0
+        let handler = NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
         for item in orderedItems{
             total = total + (item.price * Float(item.quantity))
         }
-        return NSDecimalNumber(value: total)
+        return NSDecimalNumber(value: total).rounding(accordingToBehavior: handler)
     }
     
     @objc func handleApplePayButtonTapped() {
@@ -182,23 +191,51 @@ extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
         print("Test")
         dismiss(animated: true, completion: {
             if (self.paymentSucceeded) {
-                // Show a receipt page...
+                //Prepare data for submission to database
+                let date = Date()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "MM/dd/yyyy"
+                let formatedDate = formatter.string(from: date)
+                let price = self.getCartTotal().stringValue
+                let user = Auth.auth().currentUser
+                //Add information to Firestore DB
+                if (user != nil) {
+                    var ref: DocumentReference? = nil
+                    ref = self.db.collection("orders").addDocument(data: [
+                        "userID": user!.uid,
+                        "orderDate": formatedDate,
+                        "orderPrice": price,
+                        "restaurauntID": "0"
+                    ]) { err in
+                        if let err = err {
+                            print("Error adding document: \(err)")
+                        } else {
+                            print("Document added with ID: \(ref!.documentID)")
+                        }
+                    }
+                }
+                //Empty cart
                 orderedItems = []
+                //Reload table
                 self.cartTableView.reloadData()
+                // Show a confirmation page
                 self.showPopOver()
             } else {
+                //Something went wrong, display an error
                 self.showAlert(title: "Payment not Successful", alertMessage: "An error has occured")
             }
         })
     }
     
     func showPopOver(){
+        //Shows success message
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "popupVC")
         self.present(controller, animated: true, completion: nil)
     }
     
     func getCartTotalForStripe() -> Int{
+        //Displays total multiplied by 100, Ex. $3.00 = 300
         var total: Float = 0
         for item in orderedItems{
             total = total + (item.price * Float(item.quantity))
@@ -207,6 +244,7 @@ extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
     }
     
     func showAlert(title: String, alertMessage: String){
+        //Shows popup alert with given content to user
         let alertController = UIAlertController(title: NSLocalizedString(title,comment:""), message: NSLocalizedString(alertMessage,comment:""), preferredStyle: .alert)
         let defaultAction = UIAlertAction(title:     NSLocalizedString("Ok", comment: ""), style: .default, handler: { (pAlert) in
                         //Do whatever you wants here
