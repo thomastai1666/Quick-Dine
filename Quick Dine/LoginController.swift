@@ -77,7 +77,12 @@ class LoginController: UIViewController {
         loginButton.layer.cornerRadius = 5;
         registerButton.layer.cornerRadius = 5;
         setupProviderLoginView()
-        print("Hello");
+        let user = Auth.auth().currentUser
+        if user != nil {
+            //user already logged in
+            self.transitionToHome()
+        }
+        print("Debug: LoginController viewDidLoad called");
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,15 +184,6 @@ class LoginController: UIViewController {
             }
             }
         }
-    }
-    
-    func showAlert(title: String, alertMessage: String){
-        let alertController = UIAlertController(title: NSLocalizedString(title,comment:""), message: NSLocalizedString(alertMessage,comment:""), preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title:     NSLocalizedString("Ok", comment: ""), style: .default, handler: { (pAlert) in
-                        //Do whatever you wants here
-                })
-        alertController.addAction(defaultAction)
-        self.present(alertController, animated: true, completion: nil)
     }
     
     func validateFields() -> Bool {

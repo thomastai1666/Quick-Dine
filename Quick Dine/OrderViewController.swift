@@ -43,15 +43,7 @@ class OrderViewController: UIViewController, UISearchBarDelegate {
         if(searchText.count == 5){
             //table ID
             print(searchText)
-            var didFindRestauraunt = false
-            for restauraunt in restaurauntList{
-                for table in restauraunt.tables{
-                    if(table == searchText){
-                        didFindRestauraunt = true
-                    }
-                }
-            }
-            if(didFindRestauraunt){
+            if(restaurauntDoesExist(searchText: searchText)){
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
                 controller.tableID = searchText
@@ -63,15 +55,6 @@ class OrderViewController: UIViewController, UISearchBarDelegate {
                 orderSearchBar.text = ""
             }
         }
-    }
-    
-    func showAlert(title: String, alertMessage: String){
-        let alertController = UIAlertController(title: NSLocalizedString(title,comment:""), message: NSLocalizedString(alertMessage,comment:""), preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title:     NSLocalizedString("Ok", comment: ""), style: .default, handler: { (pAlert) in
-                        //Do whatever you wants here
-                })
-        alertController.addAction(defaultAction)
-        self.present(alertController, animated: true, completion: nil)
     }
 }
 

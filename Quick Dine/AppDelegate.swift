@@ -38,35 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
-            return false
-        }
-        
-        print("Hello Test 1")
-        // Confirm that the NSUserActivity object contains a valid NDEF message.
-        let ndefMessage = userActivity.ndefMessagePayload
-        
-        guard
-            let record = ndefMessage.records.first,
-            record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
-            let payloadText = String(data: record.payload, encoding: .utf8),
-            let tableid = payloadText.split(separator: "/").last else {
-                return false
-        }
-        
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "TabBarController")
-        self.window?.rootViewController = vc
-        self.window?.makeKeyAndVisible()
-        
-        if let tabBarController = self.window!.rootViewController as? UITabBarController {
-            tabBarController.selectedIndex = 1
-            let controller = sb.instantiateViewController(withIdentifier: "menuVC")
-            tabBarController.present(controller, animated: true, completion: nil)
-        }
-        return true
+        //Appears to have be deprecated??
+        return false
     }
-
 
 }
 

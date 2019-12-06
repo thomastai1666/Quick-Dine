@@ -96,12 +96,19 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     func found(code: String) {
         weak var pvc = self.presentingViewController
-        self.dismiss(animated: true, completion: {
-            let controller = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
-            let table = code.components(separatedBy: "thomastai.com/quickdine/?table=").last ?? ""
-            controller.tableID = table
-            pvc?.present(controller, animated: true, completion: nil)
-        })
+        let table = code.components(separatedBy: "thomastai.com/quickdine/?table=").last ?? ""
+        if(restaurauntDoesExist(searchText: table)){
+            self.dismiss(animated: true, completion: {
+                let controller = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
+                controller.tableID = table
+                pvc?.present(controller, animated: true, completion: nil)
+            })
+        }
+        else{
+            self.dismiss(animated: true, completion: {
+                pvc?.showAlert(title: "Error", alertMessage: "Table not found")
+            })
+        }
     }
 
     override var prefersStatusBarHidden: Bool {

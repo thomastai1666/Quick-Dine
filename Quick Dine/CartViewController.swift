@@ -244,13 +244,4 @@ extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
         return Int(total * 100)
     }
     
-    func showAlert(title: String, alertMessage: String){
-        //Shows popup alert with given content to user
-        let alertController = UIAlertController(title: NSLocalizedString(title,comment:""), message: NSLocalizedString(alertMessage,comment:""), preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title:     NSLocalizedString("Ok", comment: ""), style: .default, handler: { (pAlert) in
-                        //Do whatever you wants here
-                })
-        alertController.addAction(defaultAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
 }

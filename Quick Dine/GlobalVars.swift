@@ -13,6 +13,7 @@ import UIKit
 var restaurauntList = [Restauraunt]()
 
 func addRestauraunts(){
+    restaurauntList.removeAll()
     let restaraunt1tables = ["YULZC", "TXSPL"]
     let restauraunt1 = Restauraunt(identifier: "0", name: "McDonalds", image: UIImage(named: "mcdonalds"), description: "Classic American fast food", tables: restaraunt1tables)
     restaurauntList.append(restauraunt1)
@@ -134,4 +135,16 @@ struct Item {
             self.quantity = 0
         }
     }
+}
+
+func restaurauntDoesExist(searchText: String) -> Bool{
+    var didFindRestauraunt = false
+    for restauraunt in restaurauntList{
+        for table in restauraunt.tables{
+            if(table == searchText){
+                didFindRestauraunt = true
+            }
+        }
+    }
+    return didFindRestauraunt
 }
