@@ -84,7 +84,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ordercell", for: indexPath) as! OrderViewCell
         cell.orderDate.text = self.pastOrders[indexPath.row].0
-        cell.orderPrice.text = self.pastOrders[indexPath.row].1
+        cell.orderPrice.text = "$" + self.pastOrders[indexPath.row].1
         cell.restaurauntName.text = self.pastOrders[indexPath.row].2
         cell.restaurauntImage.image = self.restaurauntPicture[self.pastOrders[indexPath.row].2] ?? UIImage.init(named: "defaultlogo")
         cell.restaurauntImage.layer.cornerRadius = 5

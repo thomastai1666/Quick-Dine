@@ -10,14 +10,14 @@ import UIKit
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
-    let restaurauntName = ["Panera Bread", "McDonalds", "DigInn"]
-    let restaurauntImages = [UIImage(named: "panerabread"), UIImage(named: "mcdonalds"), UIImage(named: "diginn")]
-    let restaurauntDescription = ["Salads, sandwhiches and soups", "Fast food burgers and fries", "Local American food"]
     @IBOutlet var restaurauntCollectionView: UICollectionView!
+    
+    var menuItems = [MenuItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        addRestauraunts()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -25,14 +25,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return restaurauntName.count
+        return restaurauntList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
-        cell.restaurauntImage.image = restaurauntImages[indexPath.row]
-        cell.restaurauntName.text = restaurauntName[indexPath.row]
-        cell.restaurauntDescription.text = restaurauntDescription[indexPath.row]
+        cell.restaurauntImage.image = restaurauntList[indexPath.row].image
+        cell.restaurauntName.text = restaurauntList[indexPath.row].name
+        cell.restaurauntDescription.text = restaurauntList[indexPath.row].description
+        cell.restaurauntID = restaurauntList[indexPath.row].identifier
         cell.contentView.layer.cornerRadius = 10.0
         cell.contentView.layer.masksToBounds = true
         if self.traitCollection.userInterfaceStyle == .dark {
@@ -51,12 +52,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presentMenuViewController(tableID: "Implement Later")
+        presentMenuViewController(tableID: restaurauntList[indexPath.row].identifier)
     }
     
     func presentMenuViewController(tableID: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "menuVC")
+        let controller = storyboard.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
+        controller.restaurauntID = tableID
         self.present(controller, animated: true, completion: nil)
     }
 

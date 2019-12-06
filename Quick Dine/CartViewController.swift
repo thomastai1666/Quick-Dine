@@ -18,13 +18,14 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var applePayButton: PKPaymentButton!
     @IBOutlet var applePayStackView: UIStackView!
     var paymentSucceeded = false
-    
+    @IBOutlet var totalLabel: UILabel!
     @IBOutlet var cartTableView: UITableView!
     
     let db = Firestore.firestore()
     
     func reloadTable() {
         cartTableView.reloadData()
+        totalLabel.text = "Total: $" + getCartTotal().stringValue
     }
     
     override func viewDidLoad() {
@@ -49,7 +50,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        cartTableView.reloadData()
+        self.reloadTable()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

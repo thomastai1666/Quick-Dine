@@ -12,5 +12,5 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var restaurauntImage: UIImageView!
     @IBOutlet weak var restaurauntName: UILabel!
     @IBOutlet weak var restaurauntDescription: UILabel!
-    
+    var restaurauntID: String = ""
 }

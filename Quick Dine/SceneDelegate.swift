@@ -49,22 +49,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        
+        print("Scene continueUserActivity Called")
+        
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else{
             return
         }
         
-        print("Hello Test 2")
-        // Confirm that the NSUserActivity object contains a valid NDEF message.
-//        let ndefMessage = userActivity.ndefMessagePayload
+        guard let incomingURL = userActivity.webpageURL else{
+            return
+        }
         
-//        guard
-//            let record = ndefMessage.records.first,
-//            record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
-//            let payloadText = String(data: record.payload, encoding: .utf8),
-//            let tableid = payloadText.split(separator: "/").last else {
-//                return
-//        }
-
+        let urlAsString = incomingURL.absoluteString
+        let table = urlAsString.components(separatedBy: "thomastai.com/quickdine/?table=").last ?? ""
+        print(table)
+        
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "TabBarController")
         self.window?.rootViewController = vc
@@ -72,11 +71,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let tabBarController = self.window!.rootViewController as? UITabBarController {
             tabBarController.selectedIndex = 1
-            let controller = sb.instantiateViewController(withIdentifier: "menuVC")
+            let controller = sb.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
+            controller.tableID = table
             tabBarController.present(controller, animated: true, completion: nil)
         }
-//        let mainVC = navigationController.topViewController as? UITabBarController
-//        mainVC?.selectedIndex = 1
+        
     }
 
 }
