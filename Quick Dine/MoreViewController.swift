@@ -19,9 +19,12 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var user = Auth.auth().currentUser
     let db = Firestore.firestore()
-    var pastOrders = [(String, String, String)]()
-    var restauraunts = ["0": "McDonalds"]
-    var restaurauntPicture = ["McDonalds": UIImage.init(named: "mcdonaldslogo")]
+    var pastOrders = [(Timestamp, String, String)]()
+    var restauraunts = ["0": "McDonalds", "1": "Chick-fil-a", "2": "Olive Garden", "3": "Chilis"]
+    var restaurauntPicture = ["McDonalds": UIImage.init(named: "mcdonaldslogo"),
+                              "Chick-fil-a": UIImage.init(named: "chickfilalogo"),
+                              "Olive Garden": UIImage.init(named: "olivegardenlogo"),
+                              "Chilis": UIImage.init(named: "chilislogo")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +35,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         if (user != nil) {
             profileEmail.text = user?.email
             let docRef = db.collection("orders")
-            let query = docRef.whereField("userID", isEqualTo: user!.uid)
+            let query = docRef.whereField("userID", isEqualTo: user!.uid).order(by: "orderDate", descending: true)
             pastOrders = []
             query.getDocuments() { (querySnapshot, err) in
                     if let err = err {
@@ -40,7 +43,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
                     } else {
                         for document in querySnapshot!.documents {
                             print("\(document.documentID) => \(document.data())")
-                            if let orderDate = document.data()["orderDate"] as? String{
+                            if let orderDate = document.data()["orderDate"] as? Timestamp{
                                 if let orderPrice = document.data()["orderPrice"] as? String{
                                     if let restaurauntID = document.data()["restaurauntID"] as? String{
                                         self.pastOrders.append((orderDate, orderPrice, self.restauraunts[restaurauntID] ?? "Unknown Restauraunt"))
@@ -83,7 +86,11 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
             return emptycell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ordercell", for: indexPath) as! OrderViewCell
-        cell.orderDate.text = self.pastOrders[indexPath.row].0
+        let orderDate = self.pastOrders[indexPath.row].0.dateValue()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.locale = Locale(identifier: "en_US")
+        cell.orderDate.text = formatter.string(from: orderDate)
         cell.orderPrice.text = "$" + self.pastOrders[indexPath.row].1
         cell.restaurauntName.text = self.pastOrders[indexPath.row].2
         cell.restaurauntImage.image = self.restaurauntPicture[self.pastOrders[indexPath.row].2] ?? UIImage.init(named: "defaultlogo")

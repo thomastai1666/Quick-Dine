@@ -21,8 +21,11 @@ func addRestauraunts(){
     let restauraunt2 = Restauraunt(identifier: "1", name: "Chick-fil-a", image: UIImage(named: "chickfila"), description: "Home of the chicken sandwhich", tables: restaraunt2tables)
     restaurauntList.append(restauraunt2)
     let restaraunt3tables = ["AXYLO", "TYLDU"]
-    let restauraunt3 = Restauraunt(identifier: "2", name: "Olive Garden", image: UIImage(named: "olivegarden"), description: "Casual Italian food", tables: restaraunt3tables)
+    let restauraunt3 = Restauraunt(identifier: "2", name: "Olive Garden", image: UIImage(named: "olivegarden"), description: "Italian-American cuisine", tables: restaraunt3tables)
     restaurauntList.append(restauraunt3)
+    let restaraunt4tables = ["KLMDP", "BQJDA"]
+    let restauraunt4 = Restauraunt(identifier: "3", name: "Chilis", image: UIImage(named: "chilis"), description: "American casual dining chain", tables: restaraunt4tables)
+    restaurauntList.append(restauraunt4)
 }
 
 struct Restauraunt{
@@ -59,7 +62,8 @@ class MenuItem{
 var mcdonaldsMenu = [MenuItem]()
 var chickfilaMenu = [MenuItem]()
 var olivegardenMenu = [MenuItem]()
-var menus = ["0": mcdonaldsMenu, "1": chickfilaMenu, "2": olivegardenMenu]
+var chilismenu = [MenuItem]()
+var menus = ["0": mcdonaldsMenu, "1": chickfilaMenu, "2": olivegardenMenu, "3": chilismenu]
 
 func addMenuItems(){
     let item0 = Item(itemid: 0, name: "Egg McMuffin", calories: 300, price: 3.99, image: UIImage(named: "item0"))
@@ -103,8 +107,19 @@ func addMenuItems(){
     let item36 = Item(itemid: 36, name: "Zoodles Primavera", calories: 460, price: 13.99, image: UIImage(named: "item36"))
     let item37 = Item(itemid: 37, name: "Grilled Chicken Margherita", calories: 380, price: 13.99, image: UIImage(named: "item37"))
     let item38 = Item(itemid: 38, name: "Spaghetti with Meatballs", calories: 680, price: 13.99, image: UIImage(named: "item38"))
-    let item39 = Item(itemid: 23, name: "Shrimp Scampi", calories: 480, price: 13.99, image: UIImage(named: "item39"))
+    let item39 = Item(itemid: 39, name: "Shrimp Scampi", calories: 480, price: 13.99, image: UIImage(named: "item39"))
     olivegardenMenu.append(MenuItem.init(itemType: "Lunch", items: [item23, item24, item25, item26, item27, item28, item29, item30, item31, item32, item33, item34, item35, item36, item37, item38, item39]))
+    let item40 = Item(itemid: 40, name: "Double Burger", calories: 990, price: 8.00, image: UIImage(named: "item40"))
+    let item41 = Item(itemid: 41, name: "1975 Soft Tacos", calories: 920, price: 8.00, image: UIImage(named: "item41"))
+    let item42 = Item(itemid: 42, name: "Spicy Shrimp Tacos", calories: 900, price: 8.00, image: UIImage(named: "item42"))
+    let item43 = Item(itemid: 43, name: "Bacon Chicken Quesadilla", calories: 1370, price: 8.00, image: UIImage(named: "item43"))
+    let item44 = Item(itemid: 44, name: "Boneless Wings", calories: 1040, price: 8.00, image: UIImage(named: "item44"))
+    let item45 = Item(itemid: 45, name: "Bacon Avocado Chicken Sandwich", calories: 830, price: 8.00, image: UIImage(named: "item45"))
+    let item46 = Item(itemid: 46, name: "California Turkey Club", calories: 760, price: 8.00, image: UIImage(named: "item46"))
+    let item47 = Item(itemid: 47, name: "Chicken Fresh Mex Bowl", calories: 930, price: 8.00, image: UIImage(named: "item47"))
+    let item48 = Item(itemid: 48, name: "Lunch Chicken Fajitas", calories: 1250, price: 9.19, image: UIImage(named: "item48"))
+    let item49 = Item(itemid: 49, name: "Mini Chocolate Molten", calories: 570, price: 2.49, image: UIImage(named: "item49"))
+    chilismenu.append(MenuItem.init(itemType: "Lunch Combos", items: [item40, item41, item42, item43, item44, item45, item46, item47, item48, item49]))
 }
 
 //Used in MenuItem class

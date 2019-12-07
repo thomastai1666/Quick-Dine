@@ -8,19 +8,21 @@
 
 import UIKit
 
+var restaurauntID: String = "0"
+
 class MenuViewController: UIViewController, UISearchResultsUpdating{
     
     var tableID:String = ""
-    var restaurauntID: String = "0"
     var selectedMenu = [MenuItem]()
     var filteredItems = [MenuItem]()
     let searchController = UISearchController(searchResultsController: nil)
+    @IBOutlet weak var menuStackView: UIStackView!
     @IBOutlet weak var menuTableView: UITableView!
     
     func updateSearchResults(for searchController: UISearchController) {
         filterUsingSearchText(searchText: searchController.searchBar.text!)
     }
-    
+
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
     }
@@ -34,10 +36,10 @@ class MenuViewController: UIViewController, UISearchResultsUpdating{
         // Do any additional setup after loading the view.
         addMenuItems()
         selectedMenu = findTable()
+        menuTableView.reloadData()
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Menu"
-        menuTableView.tableHeaderView = searchController.searchBar
+        menuStackView.addSubview(searchController.searchBar)
         definesPresentationContext = true
     }
     
@@ -81,15 +83,15 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
         if(isFiltering){
             return filteredItems.count
         }
-        else{
-            return selectedMenu.count
-        }
+        print(selectedMenu.count)
+        return selectedMenu.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(isFiltering){
             return filteredItems[section].items?.count ?? 0
         }
+        print(selectedMenu[section].items?.count ?? 0)
         return selectedMenu[section].items?.count ?? 0
     }
     

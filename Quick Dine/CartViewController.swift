@@ -193,10 +193,6 @@ extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
         dismiss(animated: true, completion: {
             if (self.paymentSucceeded) {
                 //Prepare data for submission to database
-                let date = Date()
-                let formatter = DateFormatter()
-                formatter.dateFormat = "MM/dd/yyyy"
-                let formatedDate = formatter.string(from: date)
                 let price = self.getCartTotal().stringValue
                 let user = Auth.auth().currentUser
                 //Add information to Firestore DB
@@ -204,9 +200,9 @@ extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
                     var ref: DocumentReference? = nil
                     ref = self.db.collection("orders").addDocument(data: [
                         "userID": user!.uid,
-                        "orderDate": formatedDate,
+                        "orderDate": FieldValue.serverTimestamp(),
                         "orderPrice": price,
-                        "restaurauntID": "0"
+                        "restaurauntID": restaurauntID
                     ]) { err in
                         if let err = err {
                             print("Error adding document: \(err)")

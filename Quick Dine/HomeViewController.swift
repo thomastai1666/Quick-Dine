@@ -99,7 +99,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     func presentMenuViewController(tableID: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
-        controller.restaurauntID = tableID
+        restaurauntID = tableID
         self.present(controller, animated: true, completion: nil)
     }
 
