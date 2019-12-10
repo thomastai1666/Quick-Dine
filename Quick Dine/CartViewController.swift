@@ -25,7 +25,9 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func reloadTable() {
         cartTableView.reloadData()
-        totalLabel.text = "Total: $" + getCartTotal().stringValue
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        totalLabel.text = "Total: " + (numberFormatter.string(from: self.getCartTotal()) ?? "$0.00")
     }
     
     override func viewDidLoad() {
@@ -106,8 +108,6 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Configure the line items on the payment request
         paymentRequest.paymentSummaryItems = [
             PKPaymentSummaryItem(label: "Food", amount: getCartTotal()),
-            // The final line should represent your company;
-            // it'll be prepended with the word "Pay" (i.e. "Pay iHats, Inc $50")
             PKPaymentSummaryItem(label: "Quickdine, Inc", amount: getCartTotal()),
         ]
         // Present Apple Pay payment sheet
@@ -116,7 +116,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
             paymentAuthorizationViewController.delegate = self
             present(paymentAuthorizationViewController, animated: true)
         } else {
-            // There is a problem with your Apple Pay configuration
+            // There is a problem with the Apple Pay configuration
         }
     }
     
@@ -173,7 +173,6 @@ extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
                     
                     if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
                         // Once the payment is successful, show the user that the purchase has been successful
-                        self.paymentSucceeded = true
                         completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
                     } else {
                         completion(PKPaymentAuthorizationResult(status: .failure, errors: nil))
@@ -189,11 +188,12 @@ extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
 
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
         // Dismiss payment authorization view controller
-        print("Test")
         dismiss(animated: true, completion: {
             if (self.paymentSucceeded) {
                 //Prepare data for submission to database
-                let price = self.getCartTotal().stringValue
+                let numberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = .currency
+                let price = numberFormatter.string(from: self.getCartTotal())
                 let user = Auth.auth().currentUser
                 //Add information to Firestore DB
                 if (user != nil) {
@@ -201,7 +201,7 @@ extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
                     ref = self.db.collection("orders").addDocument(data: [
                         "userID": user!.uid,
                         "orderDate": FieldValue.serverTimestamp(),
-                        "orderPrice": price,
+                        "orderPrice": price!,
                         "restaurauntID": restaurauntID
                     ]) { err in
                         if let err = err {

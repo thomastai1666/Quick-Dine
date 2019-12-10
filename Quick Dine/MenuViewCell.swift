@@ -10,11 +10,11 @@ import UIKit
 
 class MenuViewCell: UITableViewCell {
     
-    @IBOutlet weak var menuImage: UIImageView!
-    @IBOutlet weak var menuName: UILabel!
-    @IBOutlet weak var menuCalorieCount: UILabel!
-    @IBOutlet weak var menuPrice: UILabel!
-    @IBOutlet weak var menuItemCount: UILabel!
+    @IBOutlet var menuImage: UIImageView!
+    @IBOutlet var menuName: UILabel!
+    @IBOutlet var menuCalorieCount: UILabel!
+    @IBOutlet var menuPrice: UILabel!
+    @IBOutlet var menuItemCount: UILabel!
     
     var MenuViewCellItem: Item!
     

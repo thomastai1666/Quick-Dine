@@ -91,7 +91,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         formatter.dateStyle = .medium
         formatter.locale = Locale(identifier: "en_US")
         cell.orderDate.text = formatter.string(from: orderDate)
-        cell.orderPrice.text = "$" + self.pastOrders[indexPath.row].1
+        cell.orderPrice.text = self.pastOrders[indexPath.row].1
         cell.restaurauntName.text = self.pastOrders[indexPath.row].2
         cell.restaurauntImage.image = self.restaurauntPicture[self.pastOrders[indexPath.row].2] ?? UIImage.init(named: "defaultlogo")
         cell.restaurauntImage.layer.cornerRadius = 5

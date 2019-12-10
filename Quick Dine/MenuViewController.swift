@@ -43,6 +43,10 @@ class MenuViewController: UIViewController, UISearchResultsUpdating{
         definesPresentationContext = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        menuTableView.reloadData()
+    }
+    
     func filterUsingSearchText(searchText: String) {
         var matchedItems = [Item]()
         filteredItems.removeAll()
@@ -75,16 +79,32 @@ class MenuViewController: UIViewController, UISearchResultsUpdating{
         dismiss(animated: true, completion: nil)
     }
     
-    
 }
 
 extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         if(isFiltering){
             return filteredItems.count
         }
         print(selectedMenu.count)
         return selectedMenu.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Selected")
+        tableView.deselectRow(at: indexPath, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "itemVC") as! ItemViewController
+        let cell = tableView.cellForRow(at: indexPath) as! MenuViewCell
+        self.present(controller, animated: true, completion: nil)
+        controller.itemImage?.image = cell.menuImage.image
+        controller.itemName?.text = cell.menuName.text
+        controller.itemCalories?.text = cell.menuCalorieCount.text
+        controller.itemPrice?.text = cell.menuPrice.text
+        controller.itemcount = cell.itemcount
+        controller.itemQuantity?.text = cell.menuItemCount.text
+        controller.MenuViewCellItem = cell.MenuViewCellItem
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -97,23 +117,29 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "menucell", for: indexPath) as! MenuViewCell
+        let useThisMenu:[MenuItem]
         if(isFiltering){
-        cell.menuName.text = filteredItems[indexPath.section].items![indexPath.row].name
-        cell.menuCalorieCount.text = String(filteredItems[indexPath.section].items![indexPath.row].calories) + " Calories"
-        cell.menuPrice.text = "$" + String(filteredItems[indexPath.section].items![indexPath.row].price)
-        cell.menuImage.image = filteredItems[indexPath.section].items![indexPath.row].image
-        cell.setItem(item: filteredItems[indexPath.section].items![indexPath.row])
-        cell.menuImage.layer.cornerRadius = 5.0
-        
+            useThisMenu = filteredItems
         }
         else{
-        cell.menuName.text = selectedMenu[indexPath.section].items![indexPath.row].name
-        cell.menuCalorieCount.text = String(selectedMenu[indexPath.section].items![indexPath.row].calories) + " Calories"
-        cell.menuPrice.text = "$" + String(selectedMenu[indexPath.section].items![indexPath.row].price)
-        cell.menuImage.image = selectedMenu[indexPath.section].items![indexPath.row].image
-        cell.setItem(item: selectedMenu[indexPath.section].items![indexPath.row])
-        cell.menuImage.layer.cornerRadius = 5.0
+            useThisMenu = selectedMenu
         }
+        cell.menuName.text = useThisMenu[indexPath.section].items![indexPath.row].name
+        cell.menuCalorieCount.text = String(useThisMenu[indexPath.section].items![indexPath.row].calories) + " Calories"
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        let itemcost = numberFormatter.string(from: NSNumber(value: useThisMenu[indexPath.section].items![indexPath.row].price))
+        cell.menuPrice.text = itemcost
+        cell.menuImage.image = useThisMenu[indexPath.section].items![indexPath.row].image
+        let menuItemForCell = useThisMenu[indexPath.section].items![indexPath.row]
+        cell.setItem(item: menuItemForCell)
+        cell.menuImage.layer.cornerRadius = 5.0
+        for listitem in orderedItems{
+            if(menuItemForCell.itemid == listitem.itemid){
+                cell.itemcount = listitem.quantity
+                cell.menuItemCount.text = String(listitem.quantity)
+                }
+            }
         return cell
     }
     
