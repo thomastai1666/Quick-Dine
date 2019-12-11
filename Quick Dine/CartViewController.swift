@@ -12,6 +12,7 @@ import PassKit
 import Stripe
 import FirebaseAuth
 import Firebase
+import UserNotifications
 
 class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CartTableDelegate{
     
@@ -28,6 +29,20 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
         totalLabel.text = "Total: " + (numberFormatter.string(from: self.getCartTotal()) ?? "$0.00")
+        updateTabBarBadge()
+    }
+    
+    func updateTabBarBadge(){
+        if let tabItems = tabBarController?.tabBar.items {
+            // In this case we want to modify the badge number of the third tab:
+            let tabItem = tabItems[2]
+            if(orderedItems.count == 0){
+                tabItem.badgeValue = nil
+            }
+            else{
+                tabItem.badgeValue = String(orderedItems.count)
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -122,6 +137,13 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
             // There is a problem with the Apple Pay configuration
         }
     }
+    
+    @IBAction func trashButtonPressed(_ sender: Any) {
+        orderedItems = []
+        cartTableView.reloadData()
+        updateTabBarBadge()
+    }
+    
     
 }
 
@@ -218,9 +240,12 @@ extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
                 orderedItems = []
                 //Reload table
                 self.cartTableView.reloadData()
+                self.updateTabBarBadge()
                 self.totalLabel.text = "Total: $0.00"
                 // Show a confirmation page
                 self.showPopOver()
+                // Show restauraunt conformation notification
+                self.showNotification()
             } else {
                 //Something went wrong, display an error
                 self.showAlert(title: "Payment not Successful", alertMessage: "An error has occured")
@@ -235,6 +260,27 @@ extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
         self.present(controller, animated: true, completion: nil)
     }
     
+    func showNotification(){
+        let center = UNUserNotificationCenter.current()
+        let notificationcontent = UNMutableNotificationContent()
+        notificationcontent.title = "Order Confirmation"
+        notificationcontent.body = "The kitchen has received your order! Your food will arrive soon."
+        notificationcontent.sound = UNNotificationSound.default
+        notificationcontent.threadIdentifier = "local-notification"
+        
+        let date = Date(timeIntervalSinceNow: 10)
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        
+        let notificationtrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        let request = UNNotificationRequest(identifier: "content", content: notificationcontent, trigger: notificationtrigger)
+        
+        center.add(request){ (error) in
+            if error != nil{
+                print(error.debugDescription)
+            }
+        }
+    }
+    
     func getCartTotalForStripe() -> Int{
         //Displays total multiplied by 100, Ex. $3.00 = 300
         var total: Float = 0
@@ -243,5 +289,7 @@ extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
         }
         return Int(total * 100)
     }
+    
+    
     
 }

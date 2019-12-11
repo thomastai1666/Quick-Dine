@@ -16,6 +16,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    var myTabController: UITabBarController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,12 +98,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     func found(code: String) {
         weak var pvc = self.presentingViewController
-        print(pvc)
         let table = code.components(separatedBy: "thomastai.com/quickdine/?table=").last ?? ""
         if(restaurauntDoesExist(searchText: table)){
             self.dismiss(animated: true, completion: {
                 let controller = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
                 controller.tableID = table
+                controller.myTabBarController = self.myTabController
                 pvc?.present(controller, animated: true, completion: nil)
             })
         }

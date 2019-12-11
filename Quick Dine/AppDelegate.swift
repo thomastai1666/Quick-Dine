@@ -9,9 +9,10 @@
 import UIKit
 import Firebase
 import Stripe
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -20,7 +21,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Application didFinishLaunchingWithOptions called")
         FirebaseApp.configure()
         Stripe.setDefaultPublishableKey("pk_test_qny5F9cVHRGGFh3d2UnKnzBJ00ePJZjoY9")
+        let center = UNUserNotificationCenter.current()
+        let options: UNAuthorizationOptions = [.sound, .alert, .badge]
+        center.requestAuthorization(options: options, completionHandler: { (granted, error) in
+            if error != nil{
+                print(error.debugDescription)
+            }
+        })
+        center.delegate = self
         return true
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
     }
 
     // MARK: UISceneSession Lifecycle

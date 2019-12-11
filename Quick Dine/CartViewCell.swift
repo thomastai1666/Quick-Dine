@@ -68,6 +68,7 @@ class CartViewCell: UITableViewCell {
         orderedItems.append(item)
     }
     
+    
     func removeItem(item: Item){
         for(index, listitem) in orderedItems.enumerated(){
             if(item.itemid == listitem.itemid){

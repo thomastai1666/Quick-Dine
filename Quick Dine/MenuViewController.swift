@@ -18,6 +18,7 @@ class MenuViewController: UIViewController, UISearchResultsUpdating, ModalViewCo
     var filteredItems = [MenuItem]()
     let searchController = UISearchController(searchResultsController: nil)
     var isPreviewOnly = false
+    var myTabBarController: UITabBarController?
     @IBOutlet weak var menuStackView: UIStackView!
     @IBOutlet weak var menuTableView: UITableView!
     
@@ -30,6 +31,20 @@ class MenuViewController: UIViewController, UISearchResultsUpdating, ModalViewCo
     
     override func viewWillDisappear(_ animated: Bool) {
         previousRestaurauntID = restaurauntID
+        updateTabBarBadge()
+    }
+    
+    func updateTabBarBadge(){
+        if let tabItems = myTabBarController?.tabBar.items {
+            // In this case we want to modify the badge number of the third tab:
+            let tabItem = tabItems[2]
+            if(orderedItems.count == 0){
+                tabItem.badgeValue = nil
+            }
+            else{
+                tabItem.badgeValue = String(orderedItems.count)
+            }
+        }
     }
     
     func dismissed() {

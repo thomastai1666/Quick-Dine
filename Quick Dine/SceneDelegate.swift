@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -64,16 +65,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let table = urlAsString.components(separatedBy: "thomastai.com/quickdine/?table=").last ?? ""
         print(table)
         
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "TabBarController")
-        self.window?.rootViewController = vc
-        self.window?.makeKeyAndVisible()
+        let user = Auth.auth().currentUser
+        if user != nil {
+            //user already logged in
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "TabBarController")
+            self.window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
+            
+            if let tabBarController = self.window!.rootViewController as? UITabBarController {
+                tabBarController.selectedIndex = 1
+                let controller = sb.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
+                controller.tableID = table
+                controller.myTabBarController = tabBarController
+                tabBarController.present(controller, animated: true, completion: nil)
+            }
+        }
         
-        if let tabBarController = self.window!.rootViewController as? UITabBarController {
-            tabBarController.selectedIndex = 1
-            let controller = sb.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
-            controller.tableID = table
-            tabBarController.present(controller, animated: true, completion: nil)
+        else{
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "loginVC") as! LoginController
+            vc.savedTable = table
+            self.window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
         }
         
     }

@@ -66,6 +66,7 @@ class LoginController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginProviderStackView: UIStackView!
     
+    var savedTable: String = ""
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
           return .lightContent
@@ -77,16 +78,20 @@ class LoginController: UIViewController {
         loginButton.layer.cornerRadius = 5;
         registerButton.layer.cornerRadius = 5;
         setupProviderLoginView()
-        let user = Auth.auth().currentUser
-        if user != nil {
-            //user already logged in
-            self.transitionToHome()
-        }
+        checkUserIsLoggedIn()
         print("Debug: LoginController viewDidLoad called");
     }
     
     override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
+    }
+    
+    func checkUserIsLoggedIn(){
+        let user = Auth.auth().currentUser
+        if user != nil {
+            //user already logged in
+            self.transitionToHome()
+        }
     }
     
     func setupProviderLoginView() {
@@ -206,9 +211,23 @@ class LoginController: UIViewController {
     }
     
     func transitionToHome(){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "TabBarController")
-        self.present(controller, animated: true, completion: nil)
+        if(savedTable != ""){
+            //NFC was read and we know the table identifier
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let tabController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+            tabController.selectedIndex = 1
+            self.present(tabController, animated: true, completion: nil)
+            let menuController = storyboard.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
+            menuController.tableID = savedTable
+            menuController.myTabBarController = tabController
+            tabController.present(menuController, animated: true, completion: nil)
+        }
+        else{
+            //Brign up the normal home screen
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+            self.present(controller, animated: true, completion: nil)
+        }
     }
 
 

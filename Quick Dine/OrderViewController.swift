@@ -52,7 +52,8 @@ class OrderViewController: UIViewController, UISearchBarDelegate {
     
     @IBAction func cameraButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "scannerVC")
+        let controller = storyboard.instantiateViewController(withIdentifier: "scannerVC") as! ScannerViewController
+        controller.myTabController = tabBarController
         self.present(controller, animated: true, completion: nil)
     }
     
@@ -64,6 +65,7 @@ class OrderViewController: UIViewController, UISearchBarDelegate {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
                 controller.tableID = searchText
+                controller.myTabBarController = tabBarController
                 orderSearchBar.text = ""
                 self.present(controller, animated: true, completion: nil)
             }
@@ -105,6 +107,7 @@ extension OrderViewController: NFCNDEFReaderSessionDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
         controller.tableID = tableID
+        controller.myTabBarController = tabBarController
         self.present(controller, animated: true, completion: nil)
     }
     
