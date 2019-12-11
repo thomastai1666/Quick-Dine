@@ -10,7 +10,12 @@ import UIKit
 import CoreNFC
 
 class OrderViewController: UIViewController, UISearchBarDelegate {
-
+    
+    func MenuDismissed() {
+        print("Menu Dismissed - Delegate Success")
+        updateBadgeNumber()
+    }
+    
     var session: NFCNDEFReaderSession?
     @IBOutlet var orderSearchBar: UISearchBar!
     
@@ -20,6 +25,18 @@ class OrderViewController: UIViewController, UISearchBarDelegate {
         // Do any additional setup after loading the view.
         print("Order Up")
         orderSearchBar.delegate = self
+    }
+    
+    func updateBadgeNumber(){
+        if let tabItems = tabBarController?.tabBar.items {
+            let tabItem = tabItems[2]
+            if(orderedItems.count == 0){
+                tabItem.badgeValue = nil
+            }
+            else{
+                tabItem.badgeValue = String(orderedItems.count)
+            }
+        }
     }
     
     @IBAction func orderButtonPressed(_ sender: Any) {

@@ -13,6 +13,7 @@ import UIKit
 //Tutorial Source: www.hackingwithswift.com
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
 
@@ -96,6 +97,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     func found(code: String) {
         weak var pvc = self.presentingViewController
+        print(pvc)
         let table = code.components(separatedBy: "thomastai.com/quickdine/?table=").last ?? ""
         if(restaurauntDoesExist(searchText: table)){
             self.dismiss(animated: true, completion: {

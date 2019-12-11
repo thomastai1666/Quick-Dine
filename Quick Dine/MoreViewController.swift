@@ -16,6 +16,8 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var profileEmail: UILabel!
     @IBOutlet var pastOrdersTableView: UITableView!
     @IBOutlet var logoutButton: UIButton!
+    @IBOutlet var pointsLabel: UILabel!
+    var totalOrderAmount = 0
     
     var user = Auth.auth().currentUser
     let db = Firestore.firestore()
@@ -28,10 +30,12 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        pointsLabel.isHidden = true
         // Do any additional setup after loading the view.
     }
     
     func getTableData(){
+        totalOrderAmount = 0
         if (user != nil) {
             profileEmail.text = user?.email
             let docRef = db.collection("orders")
@@ -46,6 +50,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
                             if let orderDate = document.data()["orderDate"] as? Timestamp{
                                 if let orderPrice = document.data()["orderPrice"] as? String{
                                     if let restaurauntID = document.data()["restaurauntID"] as? String{
+                                        //Add orders to array for tableView
                                         self.pastOrders.append((orderDate, orderPrice, self.restauraunts[restaurauntID] ?? "Unknown Restauraunt"))
                                     }
                                 }
@@ -53,6 +58,9 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     }
                 print(self.pastOrders)
+                self.calculateTotalPoints()
+                self.pointsLabel.text = String(self.totalOrderAmount) + " Points"
+                self.pointsLabel.isHidden = false
                 self.pastOrdersTableView.reloadData()
             }
         }
@@ -61,16 +69,29 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func calculateTotalPoints(){
+        //Add points up
+        self.totalOrderAmount = 0
+        for order in pastOrders{
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            if let number = formatter.number(from: order.1) {
+                let amount = number.floatValue
+                self.totalOrderAmount += Int(amount*100)
+            }
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         getTableData()
     }
 
     @IBAction func logoutButtonPressed(_ sender: Any) {
-       try! Auth.auth().signOut()
-
+        try! Auth.auth().signOut()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "loginVC")
         self.present(controller, animated: true, completion: nil)
+        orderedItems = []
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -97,6 +118,10 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.restaurauntImage.layer.cornerRadius = 5
         cell.restaurauntImage.layer.masksToBounds = true
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

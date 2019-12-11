@@ -100,6 +100,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
         restaurauntID = tableID
+        controller.isPreviewOnly = true
         self.present(controller, animated: true, completion: nil)
     }
 

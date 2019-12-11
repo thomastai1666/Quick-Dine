@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Kks-rx-q68">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
@@ -232,6 +232,13 @@
                                     <outlet property="delegate" destination="HwO-Qf-2Un" id="oCs-7b-CGh"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0 Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lrx-8C-mkx">
+                                <rect key="frame" x="145" y="268" width="125" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="QR9-ls-cSt"/>
@@ -240,6 +247,7 @@
                     <connections>
                         <outlet property="logoutButton" destination="JF6-jk-9x5" id="uTh-UY-g00"/>
                         <outlet property="pastOrdersTableView" destination="msf-ox-Hze" id="ubs-dp-QQc"/>
+                        <outlet property="pointsLabel" destination="Lrx-8C-mkx" id="Fra-dG-4tC"/>
                         <outlet property="profileEmail" destination="9fi-0l-fqJ" id="YLU-30-nSO"/>
                         <outlet property="profilePicture" destination="WvJ-sA-Q8U" id="lLk-h5-Qt3"/>
                     </connections>
@@ -261,6 +269,12 @@
                                 <rect key="frame" x="0.0" y="78" width="414" height="242"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Item Information" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtX-cK-jhL">
                                 <rect key="frame" x="20" y="16" width="374" height="36"/>
@@ -273,7 +287,7 @@
                                 <rect key="frame" x="20" y="511" width="374" height="231"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.91000000000000003" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <userDefinedRuntimeAttributes>
@@ -364,11 +378,16 @@
                         <viewLayoutGuide key="safeArea" id="zmh-6B-0BC"/>
                     </view>
                     <connections>
+                        <outlet property="addToCartButtonOutlet" destination="JT1-Xp-Nwu" id="lQV-fS-VVb"/>
                         <outlet property="itemCalories" destination="yD9-0n-vO4" id="a7B-fO-mCn"/>
                         <outlet property="itemImage" destination="dKh-Yc-dEN" id="9sl-0l-7Rb"/>
                         <outlet property="itemName" destination="h92-86-LAG" id="j9B-ro-eGK"/>
                         <outlet property="itemPrice" destination="Mna-Va-DCZ" id="eWB-Fz-Cii"/>
                         <outlet property="itemQuantity" destination="eBt-eE-cJQ" id="ooi-fO-KJS"/>
+                        <outlet property="minusButtonOutlet" destination="utU-TR-giD" id="Jcz-hk-5lW"/>
+                        <outlet property="plusButtonOutlet" destination="sSf-NW-nty" id="DXs-oZ-JtC"/>
+                        <outlet property="specialRequests" destination="lWM-r4-xDg" id="DtJ-Tv-X4c"/>
+                        <outlet property="speicalRequestsText" destination="bBu-vb-Y45" id="tzB-Kw-ZzV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Ke-yt-N2S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -390,7 +409,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P69-eD-8SD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P69-eD-8SD">
                                 <rect key="frame" x="0.0" y="102" width="414" height="760"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -459,6 +478,8 @@
                                             <outlet property="menuItemCount" destination="iYe-sV-3yt" id="Mz7-kr-SjQ"/>
                                             <outlet property="menuName" destination="NFT-a5-S4X" id="rU2-0b-TIG"/>
                                             <outlet property="menuPrice" destination="SwV-ts-tlN" id="vsO-B2-Vln"/>
+                                            <outlet property="minusButtonOutlet" destination="m9Z-bt-2gi" id="clp-zl-0hh"/>
+                                            <outlet property="plusButtonOutlet" destination="b1X-j9-Wgk" id="tdq-ZF-5dk"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

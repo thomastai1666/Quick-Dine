@@ -74,7 +74,10 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.selectionStyle = .none
         cell.menuName.text = orderedItems[indexPath.row].name
         cell.menuCalorieCount.text = String(orderedItems[indexPath.row].calories) + " Calories"
-        cell.menuPrice.text = "$" + String(orderedItems[indexPath.row].price)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        let itemcost = numberFormatter.string(from: NSNumber(value: orderedItems[indexPath.row].price))
+        cell.menuPrice.text = itemcost
         cell.menuImage.image = orderedItems[indexPath.row].image
         cell.itemcount = orderedItems[indexPath.row].quantity
         cell.MenuViewCellItem = orderedItems[indexPath.row]
@@ -215,6 +218,7 @@ extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
                 orderedItems = []
                 //Reload table
                 self.cartTableView.reloadData()
+                self.totalLabel.text = "Total: $0.00"
                 // Show a confirmation page
                 self.showPopOver()
             } else {

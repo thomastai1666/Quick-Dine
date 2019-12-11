@@ -9,15 +9,32 @@
 import UIKit
 
 var restaurauntID: String = "0"
+var previousRestaurauntID: String = "-1"
 
-class MenuViewController: UIViewController, UISearchResultsUpdating{
+class MenuViewController: UIViewController, UISearchResultsUpdating, ModalViewControllerDelegate{
     
     var tableID:String = ""
     var selectedMenu = [MenuItem]()
     var filteredItems = [MenuItem]()
     let searchController = UISearchController(searchResultsController: nil)
+    var isPreviewOnly = false
     @IBOutlet weak var menuStackView: UIStackView!
     @IBOutlet weak var menuTableView: UITableView!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if(restaurauntID != previousRestaurauntID && orderedItems.count > 0){
+            orderedItems = []
+            showAlert(title: "Notice", alertMessage: "Your cart has been emptied")
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        previousRestaurauntID = restaurauntID
+    }
+    
+    func dismissed() {
+        menuTableView.reloadData()
+    }
     
     func updateSearchResults(for searchController: UISearchController) {
         filterUsingSearchText(searchText: searchController.searchBar.text!)
@@ -41,10 +58,6 @@ class MenuViewController: UIViewController, UISearchResultsUpdating{
         searchController.obscuresBackgroundDuringPresentation = false
         menuStackView.addSubview(searchController.searchBar)
         definesPresentationContext = true
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        menuTableView.reloadData()
     }
     
     func filterUsingSearchText(searchText: String) {
@@ -87,31 +100,32 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
         if(isFiltering){
             return filteredItems.count
         }
-        print(selectedMenu.count)
         return selectedMenu.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected")
         tableView.deselectRow(at: indexPath, animated: true)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "itemVC") as! ItemViewController
         let cell = tableView.cellForRow(at: indexPath) as! MenuViewCell
-        self.present(controller, animated: true, completion: nil)
-        controller.itemImage?.image = cell.menuImage.image
-        controller.itemName?.text = cell.menuName.text
-        controller.itemCalories?.text = cell.menuCalorieCount.text
-        controller.itemPrice?.text = cell.menuPrice.text
+        controller.isPreviewOnly = isPreviewOnly
+        controller.itemImageValue = cell.menuImage.image
+        controller.itemNameValue = cell.menuName.text
+        controller.itemCaloriesValue = cell.menuCalorieCount.text
+        controller.itemPriceValue = cell.menuPrice.text
         controller.itemcount = cell.itemcount
-        controller.itemQuantity?.text = cell.menuItemCount.text
         controller.MenuViewCellItem = cell.MenuViewCellItem
+        controller.delegate = self
+        if(searchController.isActive == true){
+            searchController.isActive = false
+        }
+        self.present(controller, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(isFiltering){
             return filteredItems[section].items?.count ?? 0
         }
-        print(selectedMenu[section].items?.count ?? 0)
         return selectedMenu[section].items?.count ?? 0
     }
     
@@ -126,20 +140,32 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
         }
         cell.menuName.text = useThisMenu[indexPath.section].items![indexPath.row].name
         cell.menuCalorieCount.text = String(useThisMenu[indexPath.section].items![indexPath.row].calories) + " Calories"
+        //Format number for currency
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
         let itemcost = numberFormatter.string(from: NSNumber(value: useThisMenu[indexPath.section].items![indexPath.row].price))
+        //Set other initializers
         cell.menuPrice.text = itemcost
         cell.menuImage.image = useThisMenu[indexPath.section].items![indexPath.row].image
         let menuItemForCell = useThisMenu[indexPath.section].items![indexPath.row]
         cell.setItem(item: menuItemForCell)
         cell.menuImage.layer.cornerRadius = 5.0
+        //Check if item was added to cart, otherwise set quantity to zero
         for listitem in orderedItems{
             if(menuItemForCell.itemid == listitem.itemid){
                 cell.itemcount = listitem.quantity
                 cell.menuItemCount.text = String(listitem.quantity)
+                break
                 }
+            else{
+                cell.itemcount = 0
+                cell.menuItemCount.text = String(listitem.quantity)
             }
+        }
+        //If we specify the cell to be view only, let the menuviewcell know
+        if(isPreviewOnly){
+            cell.isPreviewOnly = true
+        }
         return cell
     }
     

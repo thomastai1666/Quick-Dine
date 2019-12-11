@@ -15,13 +15,21 @@ class MenuViewCell: UITableViewCell {
     @IBOutlet var menuCalorieCount: UILabel!
     @IBOutlet var menuPrice: UILabel!
     @IBOutlet var menuItemCount: UILabel!
+    @IBOutlet var minusButtonOutlet: UIButton!
+    @IBOutlet var plusButtonOutlet: UIButton!
     
+    var isPreviewOnly = false
     var MenuViewCellItem: Item!
     
     var itemcount = 0
     
     override func layoutSubviews() {
         menuItemCount.text = String(itemcount)
+        if(isPreviewOnly){
+            menuItemCount.isHidden = true
+            minusButtonOutlet.isHidden = true
+            plusButtonOutlet.isHidden = true
+        }
     }
     
     func setItem(item: Item){
@@ -42,6 +50,7 @@ class MenuViewCell: UITableViewCell {
     }
     
     @IBAction func plusButtonPressed(_ sender: Any) {
+        print("plusButtonPressed:", itemcount)
         itemcount += 1
         menuItemCount.text = String(itemcount)
         MenuViewCellItem.quantity = itemcount
@@ -68,4 +77,5 @@ class MenuViewCell: UITableViewCell {
             }
         }
     }
+    
 }
