@@ -139,6 +139,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func trashButtonPressed(_ sender: Any) {
+        self.totalLabel.text = "Total: $0.00"
         orderedItems = []
         cartTableView.reloadData()
         updateTabBarBadge()

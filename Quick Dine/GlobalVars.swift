@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 //Used for HomeViewController
 var restaurauntList = [Restauraunt]()
@@ -15,16 +16,16 @@ var restaurauntList = [Restauraunt]()
 func addRestauraunts(){
     restaurauntList.removeAll()
     let restaraunt1tables = ["YULZC", "TXSPL"]
-    let restauraunt1 = Restauraunt(identifier: "0", name: "McDonalds", image: UIImage(named: "mcdonalds"), description: "Classic American fast food", tables: restaraunt1tables)
+    let restauraunt1 = Restauraunt(identifier: "0", name: "McDonalds", image: UIImage(named: "mcdonalds"), description: "Classic American fast food", tables: restaraunt1tables, website: "https://www.mcdonalds.com/us/en-us.html", phoneNumber: "2125299660", location: CLLocation(latitude: 40.729068,longitude: -73.993238), address: "724 Broadway, New York")
     restaurauntList.append(restauraunt1)
     let restaraunt2tables = ["GFJSK", "MSGLC"]
-    let restauraunt2 = Restauraunt(identifier: "1", name: "Chick-fil-a", image: UIImage(named: "chickfila"), description: "Home of the chicken sandwhich", tables: restaraunt2tables)
+    let restauraunt2 = Restauraunt(identifier: "1", name: "Chick-fil-a", image: UIImage(named: "chickfila"), description: "Home of the chicken sandwhich", tables: restaraunt2tables, website: "https://www.chick-fil-a.com/", phoneNumber: "2129984931", location: CLLocation(latitude: 40.731078,longitude: -73.994973), address: "5 University Pl, Unit 11, New York")
     restaurauntList.append(restauraunt2)
     let restaraunt3tables = ["AXYLO", "TYLDU"]
-    let restauraunt3 = Restauraunt(identifier: "2", name: "Olive Garden", image: UIImage(named: "olivegarden"), description: "Italian-American cuisine", tables: restaraunt3tables)
+    let restauraunt3 = Restauraunt(identifier: "2", name: "Olive Garden", image: UIImage(named: "olivegarden"), description: "Italian-American cuisine", tables: restaraunt3tables, website: "https://www.olivegarden.com/home", phoneNumber: "2123333254", location: CLLocation(latitude: 40.759428,longitude: -73.984790), address: "2 Times Sq, New York")
     restaurauntList.append(restauraunt3)
     let restaraunt4tables = ["KLMDP", "BQJDA"]
-    let restauraunt4 = Restauraunt(identifier: "3", name: "Chilis", image: UIImage(named: "chilis"), description: "American casual dining chain", tables: restaraunt4tables)
+    let restauraunt4 = Restauraunt(identifier: "3", name: "Chilis", image: UIImage(named: "chilis"), description: "American casual dining chain", tables: restaraunt4tables, website: "https://www.chilis.com/", phoneNumber: "2013190804", location: CLLocation(latitude: 40.786749,longitude: -74.045736), address: "700 Plaza Dr Secaucus, New Jersey")
     restaurauntList.append(restauraunt4)
 }
 
@@ -34,13 +35,21 @@ struct Restauraunt{
     let image: UIImage?
     let description: String
     let tables: [String]
+    let website: String
+    let phoneNumber: String
+    let location: CLLocation
+    let address: String
     
-    init(identifier: String, name: String, image: UIImage?, description: String, tables: [String]){
+    init(identifier: String, name: String, image: UIImage?, description: String, tables: [String], website: String, phoneNumber: String, location: CLLocation, address: String){
         self.identifier = identifier
         self.name = name
         self.image = image ?? UIImage(named: "defaultRestauraunt")
         self.description = description
         self.tables = tables
+        self.website = website
+        self.phoneNumber = phoneNumber
+        self.location = location
+        self.address = address
     }
 }
 

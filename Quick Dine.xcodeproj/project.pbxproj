@@ -29,6 +29,7 @@
 		258372CF23918F4F002AEB63 /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 258372CE23918F33002AEB63 /* SF-Pro-Display-Regular.otf */; };
 		258372D123918FC9002AEB63 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 258372D023918FC7002AEB63 /* SF-Pro-Display-Bold.otf */; };
 		258372D32391CC07002AEB63 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258372D22391CC06002AEB63 /* OrderViewController.swift */; };
+		25ADB2A123A1DB940064EEF3 /* RestaurauntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ADB2A023A1DB940064EEF3 /* RestaurauntViewController.swift */; };
 		25BD7251239F2A0D005149FA /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD7250239F2A0D005149FA /* ItemViewController.swift */; };
 		BB0DAD3FEAFB6E0B8847BC61 /* Pods_Quick_Dine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38254615DB28E5EA58E18716 /* Pods_Quick_Dine.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		258372CE23918F33002AEB63 /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
 		258372D023918FC7002AEB63 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		258372D22391CC06002AEB63 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		25ADB2A023A1DB940064EEF3 /* RestaurauntViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurauntViewController.swift; sourceTree = "<group>"; };
 		25BD7250239F2A0D005149FA /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		2B6AA1268EE89F3B5D1CC6E7 /* Pods-Quick Dine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quick Dine.release.xcconfig"; path = "Target Support Files/Pods-Quick Dine/Pods-Quick Dine.release.xcconfig"; sourceTree = "<group>"; };
 		38254615DB28E5EA58E18716 /* Pods_Quick_Dine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quick_Dine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +107,7 @@
 				258372B223873156002AEB63 /* AppDelegate.swift */,
 				258372B623873156002AEB63 /* ViewController.swift */,
 				25111AA32396EA2700C392ED /* GlobalVars.swift */,
+				25ADB2A023A1DB940064EEF3 /* RestaurauntViewController.swift */,
 				258372C623873196002AEB63 /* LoginController.swift */,
 				258372CB2390E0DC002AEB63 /* HomeViewController.swift */,
 				25111A9723948F1000C392ED /* CollectionViewCell.swift */,
@@ -287,6 +290,7 @@
 				25BD7251239F2A0D005149FA /* ItemViewController.swift in Sources */,
 				258372B523873156002AEB63 /* SceneDelegate.swift in Sources */,
 				25111A9C2395DB0B00C392ED /* MenuViewCell.swift in Sources */,
+				25ADB2A123A1DB940064EEF3 /* RestaurauntViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

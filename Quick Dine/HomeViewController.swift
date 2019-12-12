@@ -93,14 +93,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presentMenuViewController(tableID: restaurauntList[indexPath.row].identifier)
+        presentRestViewController(restauraunt: restaurauntList[indexPath.row])
     }
     
-    func presentMenuViewController(tableID: String) {
+    func presentRestViewController(restauraunt: Restauraunt){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "menuVC") as! MenuViewController
-        restaurauntID = tableID
-        controller.isPreviewOnly = true
+        let controller = storyboard.instantiateViewController(withIdentifier: "restVC") as! RestaurauntViewController
+        controller.restauraunt = restauraunt
         self.present(controller, animated: true, completion: nil)
     }
 
